@@ -4,7 +4,7 @@ def identity(x):
 # Read a file straight into a list of strings
 def read_straight(fname):
 	f = open(fname, 'rt')
-	ret = [x.strip() for x in f.readLines()[1:]]
+	ret = [x.strip() for x in f.readlines()[1:]]
 	f.close()
 	return ret
 

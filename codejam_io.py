@@ -1,17 +1,20 @@
+def identity(x):
+	return x
+
 # Quick read if the data is one-per-line integers
-def gcj_read_simple(fname, fMap=int):
+def read_simple(fname, fMap=int):
 	f = open(fname, 'rt')
 	return [map(fMap, x.strip().split()) for x in f.readlines()[1:]]		
 	f.close()
 
 # One-per-twoline with first line removable	
-def gcj_read_simple_2(fname, fMap=int):
+def read_simple_2(fname, fMap=int):
 	f = open(fname, 'rt')
-	return [map(fMap, x.strip().split()) for x in f.readlines()[2:-1:2]]
+	return [map(fMap, x.strip().split()) for x in f.readlines()[2::2]]
 	f.close()
 
 # Quick read T groups of N lines each (N given a line before as first element)
-def gcj_read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
+def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -26,7 +29,7 @@ def gcj_read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
 	
 # Quick read T groups of lines given by some function of the first line among them
 # Exact same default behaviour as gcj_read_N; but more flexible
-def gcj_read_f(fname, fMapFn=lambda x: [str]*x[0], fOfN = lambda x: x[0]):
+def read_f(fname, fMapFn=lambda x: [str]*x[0], fOfN = lambda x: x[0]):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -43,7 +46,7 @@ def gcj_read_f(fname, fMapFn=lambda x: [str]*x[0], fOfN = lambda x: x[0]):
 
 # GCJ_READ_F with multi-line headers (also saves the headers if storeHead=True)
 # This is the most general read function and can mimic (almost) the behaviour of all the others
-def gcj_read_f_multi(fname, nlines_head=1,fMapFn=lambda x: [str]*x[0][0], fOfN = lambda x: x[0][0], storeHead=True):
+def read_f_multi(fname, nlines_head=1,fMapFn=lambda x: [str]*x[0][0], fOfN = lambda x: x[0][0], storeHead=True):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -62,7 +65,7 @@ def gcj_read_f_multi(fname, nlines_head=1,fMapFn=lambda x: [str]*x[0][0], fOfN =
 	return output
 
 	
-def gcj_read_fixed(fname, N, fMaps):
+def read_fixed(fname, N, fMaps):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -75,14 +78,14 @@ def gcj_read_fixed(fname, N, fMaps):
 	return output
 	
 # Quick one-item-per-line outputs	
-def gcj_write_simple(fname, lst):
+def write_simple(fname, lst):
 	f = open(fname, 'wt')
 	f.writelines(['Case #' + str(i+1) + ': ' + str(lst[i]) + '\n' for i in xrange(len(lst))])	
 	f.close()
 	return
 
 # Write a list of lists of strings
-def gcj_write_slst(fname, strlst):
+def write_slst(fname, strlst):
 	lwrt = []
 	for i in xrange(len(strlst)):
 		lwrt.append(['Case #' + str(i+1) + ':'])

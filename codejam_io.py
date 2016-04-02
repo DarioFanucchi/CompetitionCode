@@ -96,10 +96,12 @@ def write_simple(fname, lst):
 # Write a list of lists of strings
 def write_slst(fname, strlst):
 	lwrt = []
-	for i in xrange(len(strlst)):
-		lwrt.append(['Case #' + str(i+1) + ':'])
-		lwrt.extend(map(lambda x: str(x) + '\n'), strlst[i])
-		
+	for i, L in enumerate(strlst):
+		lwrt.append('Case #' + str(i+1) + ':\n')
+		print "s = ", L
+		lwrt.extend([' '.join(map(str, s)) + '\n' for s in L])
+
+	print 'lwrt = ', lwrt
 	f = open(fname, 'wt')
 	f.writelines(lwrt)
 	f.close()

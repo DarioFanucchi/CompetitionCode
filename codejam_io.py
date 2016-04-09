@@ -31,9 +31,9 @@ def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
 	output = []
 	ln = 1
 	for i in xrange(T):
-		N = fOfN(int(L[ln][Nelt]))
-		output.append([map(fMap, x) for x in L[ln+1:ln+N+1]])
-		ln += (N+1)			
+           N = fOfN(int(L[ln][Nelt]))
+           output.append([map(fMap, x) for x in L[ln+1:ln+N+1]])
+           ln += (N+1)			
 	return output
 	
 # Quick read T groups of lines given by some function of the first line among them

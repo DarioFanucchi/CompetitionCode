@@ -44,7 +44,7 @@ def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x, storeHead = False):
 	
 # Quick read T groups of lines given by some function of the first line among them
 # Exact same default behaviour as read_N; but more flexible
-def read_f(fname, fMapFn=lambda x: [str]*x[0], fOfN = lambda x: x[0]):
+def read_f(fname, fMapFn=lambda x: [str]*x[0], storeHead = False):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -52,9 +52,13 @@ def read_f(fname, fMapFn=lambda x: [str]*x[0], fOfN = lambda x: x[0]):
 	output = []
 	ln = 1
 	for i in xrange(T):
-		N = fOfN(map(int,L[ln]))
-		fMap = fMapFn(map(int,L[ln]))
-		output.append([map(fMap[k], L[ln+1+k]) for k in xrange(N)])
+		headerRow = map(int,L[ln])
+		fMap = fMapFn(headerRow)
+		N = len(fMap)
+		if storeHead:
+			output.append([headerRow] + [map(fMap[k], x) for k,x in enumerate(L[ln+1:ln+N+1])])
+		else:
+			output.append([map(fMap[k], x) for k,x in enumerate(L[ln+1:ln+N+1])])
 		ln += (N+1)			
 	return output
 # e.g. L = read_f('C-test.in', lambda x: [str]*x[0] + [int]*x[1], lambda x: x[0]+x[1])

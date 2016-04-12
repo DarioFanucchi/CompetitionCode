@@ -1,6 +1,9 @@
 def identity(x):
 	return x
 
+def list_as_string(L):
+	return ' '.join(map(str, L))
+
 # Read a file straight into a list of strings
 def read_straight(fname):
 	f = open(fname, 'rt')

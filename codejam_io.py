@@ -26,7 +26,7 @@ def read_simple_2(fname, fMap=int):
 	return ret
 
 # Quick read T groups of N lines each (N given a line before as first element)
-def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
+def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x, storeHead = False):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -34,9 +34,12 @@ def read_N(fname, Nelt = 0, fMap=str, fOfN = lambda x: x):
 	output = []
 	ln = 1
 	for i in xrange(T):
-           N = fOfN(int(L[ln][Nelt]))
-           output.append([map(fMap, x) for x in L[ln+1:ln+N+1]])
-           ln += (N+1)			
+		N = fOfN(int(L[ln][Nelt]))
+		if storeHead:
+			output.append([map(fMap, L[ln])] + [map(fMap, x) for x in L[ln+1:ln+N+1]])
+		else:
+			output.append([map(fMap, x) for x in L[ln+1:ln+N+1]])
+		ln += (N+1)			
 	return output
 	
 # Quick read T groups of lines given by some function of the first line among them

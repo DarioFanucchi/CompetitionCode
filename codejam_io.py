@@ -84,7 +84,7 @@ def read_f_multi(fname, nlines_head=1,fMapFn=lambda x: [str]*x[0][0], fOfN = lam
 	return output
 
 	
-def read_fixed(fname, N, fMaps):
+def read_fixed(fname, fMaps):
 	f = open(fname, 'rt')
 	L = [x.strip().split() for x in f.readlines()]
 	f.close()
@@ -92,7 +92,7 @@ def read_fixed(fname, N, fMaps):
 	ln = 1
 	output = []
 	for i in xrange(T):
-		output.append([map(fMaps[k], L[ln+k]) for k in xrange(N)])
+		output.append([map(fMaps[k], L[ln+k]) for k in xrange(len(fMaps))])
 		ln+=N
 	return output
 	

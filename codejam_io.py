@@ -90,9 +90,10 @@ def read_fixed(fname, fMaps):
 	f.close()
 	T = int(L[0][0])
 	ln = 1
+	N = len(fMaps)
 	output = []
 	for i in xrange(T):
-		output.append([map(fMaps[k], L[ln+k]) for k in xrange(len(fMaps))])
+		output.append([map(fMaps[k], L[ln+k]) for k in xrange(N)])
 		ln+=N
 	return output
 	

@@ -115,3 +115,15 @@ def write_slst(fname, strlst):
 	f.writelines(lwrt)
 	f.close()
 	return
+
+# Write a list of lists of strings, but include a word/number on the first line with 'CASE'
+def write_slst_h(fname, strlst):
+	lwrt = []
+	for i, L in enumerate(strlst):
+		lwrt.append('Case #' + str(i+1) + ': ' + L[0] + '\n')
+		lwrt.extend([' '.join(map(str, s)) + '\n' for s in L[1:]])
+
+	f = open(fname, 'wt')
+	f.writelines(lwrt)
+	f.close()
+	return

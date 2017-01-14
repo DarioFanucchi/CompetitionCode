@@ -4,6 +4,37 @@ using namespace std;
 typedef long long ll;
 
 ///////////////////////////////////////////////////////////////////////////////
+// compute all primes up to n
+vector<ll> primes(ll n){
+    ll nprimes = 0;
+    vector<bool> prime(n+1);
+    prime[0]=false;
+    prime[1]=false;
+    for (ll i=2;i<=n;i++){
+        prime[i]=true;
+    }
+    for (ll i=2;i<=sqrt(n);i++){
+        if (prime[i]){
+            nprimes++;
+            for (ll j=i+i;j<=n;j+=i){
+                prime[j]=false;
+            }
+        }
+    }
+
+    vector<ll> prim(nprimes);
+    ll idx = 0;
+    for (ll i=2;i<=n;i++){
+        if (prime[i]) prim[idx++]=i;
+    }
+    return(prim);
+}
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
 // returns leftmost integer <= r for which less_than_target is false
 template<typename T>
 ll bin_search(bool (*less_than_target)(ll cur, T target), T target, ll r){

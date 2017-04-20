@@ -26,14 +26,14 @@ function read_straight(fname::AbstractString)
 end
 
 # Quick read if the data is one-per-line integers
-function read_simple(fname::AbstractString; fMap=parse_int)
+function read_simple(fname::AbstractString, fMap=parse_int)
 	open(fname, "r") do f  
 		[fMap.(split(strip(x))) for x in readlines(f)[2:end]]
 	end
 end
 
 # One-per-twoline with first line removable	
-function read_simple_2(fname::AbstractString; fMap=parse_int)
+function read_simple_2(fname::AbstractString, fMap=parse_int)
 	open(fname, "r") do f  
 		[fMap.(split(strip(x))) for x in readlines(f)[3:2:end]]
 	end
@@ -86,7 +86,7 @@ end
 
 # READ_F with multi-line headers (also saves the headers if storeHead=true)
 # This is the most general read function and can mimic (almost) the behaviour of all the others
-function read_f_multi(fname::AbstractString; nlines_head=1,int_parser=parse_int,fMapFn=x->rep(string,x[1][1]), storeHead=true)
+function read_f_multi(fname::AbstractString,fMapFn=x->rep(string,x[1][1]); nlines_head=1,int_parser=parse_int, storeHead=true)
 	L = open(fname, "r") do f
 		split.(strip.(readlines(f)))
 	end

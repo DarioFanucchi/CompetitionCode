@@ -96,3 +96,24 @@ vector<long> assign_cpts(long n, const vector<long>& lhs, const vector<long>& rh
 
 
 ////////////////////////////////////////////////////////////////////////////////
+
+// longest palindromic subsequence
+int long_pal_subsequence(const vector<long>& v)
+{
+    int n = v.size();
+    int L[n][n]; 
+    for(int i = 0; i < n; i++)L[i][i] = 1;
+
+    for(int lng = 2; lng <= n; lng++){
+        for(int i=0; i<n-lng+1; i++){
+            int j = i+lng-1;
+            if(v[i]==v[j] && lng == 2)
+                L[i][j] = 2;
+            else if (v[i] == v[j])
+                L[i][j] = L[i+1][j-1] + 2;
+            else
+                L[i][j] = max(L[i][j-1], L[i+1][j]);
+        }
+    } 
+    return L[0][n-1];
+}

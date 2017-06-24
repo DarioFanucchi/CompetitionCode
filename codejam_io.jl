@@ -4,6 +4,16 @@ export parse_int, parse_bigint, rep
 export read_straight, read_simple, read_simple_2, read_N, read_f, read_f_multi, read_fixed
 export write_simple, write_slst, write_slst_h
 export getFinFout, getFinFout_A, getFinFout_B, getFinFout_C, getFinFout_D, getFinFout_E, getFinFout_F
+export nestedToMatrix
+
+function nestedToMatrix{T<:Any}(x::Array{T,1})
+    C, maxC = extrema(length.(x))
+    if C != maxC
+        error("Data is not actually a matrix")
+    end
+    R = length(x)
+    return [x[i][j] for i in 1:R, j in 1:C]
+end
 
 function parse_int(x)
 	parse(Int, x)
